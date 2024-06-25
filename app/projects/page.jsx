@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BsArrowUpRight, BsGithub, BSGithub } from "react-icons/bs";
+import { BsGithub } from "react-icons/bs";
 
 import {
   Tooltip,
@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import WorkSliderBtns from "@/components/WorkSliderBtns";
+
 const projectsDone = [
   {
     num: "01",
@@ -32,7 +33,8 @@ const projectsDone = [
     github: "",
   },
 ];
-const projects = () => {
+
+const Projects = () => {
   const [project, setProject] = useState(projectsDone[0]);
 
   const handleSlideChange = (swiper) => {
@@ -127,4 +129,4 @@ const projects = () => {
   );
 };
 
-export default projects;
+export default Projects;
