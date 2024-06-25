@@ -30,7 +30,7 @@ const projectsDone = [
     title: "jaytat.dev",
     description: "Personal website",
     image: "/assets/duck.png",
-    github: "",
+    github: "https://github.com/jaytat132/jay-portfolio",
   },
 ];
 
