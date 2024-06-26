@@ -8,6 +8,10 @@ import { Button } from './ui/button';
 
 const links = [
     {
+        name: 'about',
+        path: '/about'
+    },
+    {
         name: 'resume',
         path: '/resume'
     },
