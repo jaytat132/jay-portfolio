@@ -17,7 +17,7 @@ const Home = () => {
             <NameAnimation />
              {/* Empty Line*/}
              <div className="my-4"></div>
-            <p>I'm currently a upcoming Senior studying Computer Science at the University of California, Davis</p>
+            <p>I'm currently an upcoming Senior studying Computer Science at the University of California, Davis.</p>
             {/* Empty Line*/}
             <div className="my-4"></div>
             {/*socials*/}
