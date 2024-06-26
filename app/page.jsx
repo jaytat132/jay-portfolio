@@ -1,3 +1,4 @@
+import NameAnimation from "@/components/NameAnimation"
 import Photo from "@/components/Photo"
 import Social from "@/components/Social"
 
@@ -9,10 +10,11 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center text-center xl:flex-row xl:items-center xl:justify-between xl:pt-8 xl:pb-24 xl:text-left">
           {/* text */}
           <div>
-
             <h1 className="h1">
-              Hello, my name is <br /> <span className="text-accent">Jay Tat</span>
+              Hello, my name is
             </h1>
+            <br /> 
+            <NameAnimation />
              {/* Empty Line*/}
              <div className="my-4"></div>
             <p>I'm currently a upcoming Senior studying Computer Science at the University of California, Davis</p>
