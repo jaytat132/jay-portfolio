@@ -24,6 +24,7 @@ const Header = () => {
              <Button>Contact me</Button>
             </Link>
         </div>
+        {/* mobileNav */}
         <div className="xl:hidden"><MobileNav/></div>
             
         
