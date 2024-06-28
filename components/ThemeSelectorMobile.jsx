@@ -12,11 +12,15 @@ import PrimarySelector from "./PrimarySelector";
 import AccentSelector from "./AccentSelector";
 
 const ThemeSelectorMobile = () => {
-  const [theme, setTheme] = useState("Default");
-  const [customPrimary, setCustomPrimary] = useState("#000000");
-  const [customAccent, setCustomAccent] = useState("#ffffff");
-  const [previousPrimary, setPreviousPrimary] = useState("#000000");
-  const [previousAccent, setPreviousAccent] = useState("#ffffff");
+  const [theme, setTheme] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("theme") || "Default" : "Default"
+  );
+  const [customPrimary, setCustomPrimary] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("customPrimary") || "#000000" : "#000000"
+  );
+  const [customAccent, setCustomAccent] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("customAccent") || "#ffffff" : "#ffffff"
+  );
 
   useEffect(() => {
     if (theme === "Blue and Pink") {
@@ -26,8 +30,6 @@ const ThemeSelectorMobile = () => {
         "--accent-hover-color",
         "#A3B3E6"
       );
-      setPreviousPrimary("#2F3C7E");
-      setPreviousAccent("#FBEAEB");
     } else if (theme === "Black and Yellow") {
       document.documentElement.style.setProperty("--primary-color", "#101820");
       document.documentElement.style.setProperty("--accent-color", "#FEE715");
@@ -35,8 +37,6 @@ const ThemeSelectorMobile = () => {
         "--accent-hover-color",
         "#FFD700"
       );
-      setPreviousPrimary("#101820");
-      setPreviousAccent("#FEE715");
     } else if (theme === "Dark Blue and Light Blue") {
       document.documentElement.style.setProperty("--primary-color", "#00246B");
       document.documentElement.style.setProperty("--accent-color", "#CADCFC");
@@ -44,21 +44,15 @@ const ThemeSelectorMobile = () => {
         "--accent-hover-color",
         "#4361EE"
       );
-      setPreviousPrimary("#00246B");
-      setPreviousAccent("#CADCFC");
     } else if (theme === "Custom") {
-      document.documentElement.style.setProperty(
-        "--primary-color",
-        customPrimary
-      );
-      document.documentElement.style.setProperty(
-        "--accent-color",
-        customAccent
-      );
+      document.documentElement.style.setProperty("--primary-color", customPrimary);
+      document.documentElement.style.setProperty("--accent-color", customAccent);
       document.documentElement.style.setProperty(
         "--accent-hover-color",
         customAccent // Adjust this as needed
       );
+      localStorage.setItem("customPrimary", customPrimary);
+      localStorage.setItem("customAccent", customAccent);
     } else {
       document.documentElement.style.setProperty("--primary-color", "#1c1c22");
       document.documentElement.style.setProperty("--accent-color", "#42342B");
@@ -66,16 +60,11 @@ const ThemeSelectorMobile = () => {
         "--accent-hover-color",
         "#8A9A5B"
       );
-      setPreviousPrimary("#1c1c22");
-      setPreviousAccent("#42342B");
     }
+    localStorage.setItem("theme", theme);
   }, [theme, customPrimary, customAccent]);
 
   const handleThemeChange = (value) => {
-    if (value === "Custom") {
-      setCustomPrimary(previousPrimary);
-      setCustomAccent(previousAccent);
-    }
     setTheme(value);
   };
 
@@ -90,9 +79,7 @@ const ThemeSelectorMobile = () => {
             <SelectItem value="Default">Default</SelectItem>
             <SelectItem value="Blue and Pink">Blue and Pink</SelectItem>
             <SelectItem value="Black and Yellow">Black and Yellow</SelectItem>
-            <SelectItem value="Dark Blue and Light Blue">
-              Dark Blue and Light Blue
-            </SelectItem>
+            <SelectItem value="Dark Blue and Light Blue">Dark Blue and Light Blue</SelectItem>
             <SelectItem value="Custom">Custom</SelectItem>
           </SelectGroup>
         </SelectContent>
