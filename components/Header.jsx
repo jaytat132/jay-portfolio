@@ -19,7 +19,6 @@ const Header = () => {
         {/* desktop */}
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
-
           <ThemeSelector />
           <Link href="mailto:jaytat132@gmail.com">
             <Button>Contact me</Button>
