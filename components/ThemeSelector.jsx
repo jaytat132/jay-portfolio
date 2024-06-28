@@ -12,17 +12,16 @@ import PrimarySelector from "./PrimarySelector";
 import AccentSelector from "./AccentSelector";
 
 const ThemeSelector = () => {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || "Default");
-  const [customPrimary, setCustomPrimary] = useState(() => localStorage.getItem('customPrimary') || "#000000");
-  const [customAccent, setCustomAccent] = useState(() => localStorage.getItem('customAccent') || "#ffffff");
+  // Initialize state with default values
+  const [theme, setTheme] = useState("Default");
+  const [customPrimary, setCustomPrimary] = useState("#000000");
+  const [customAccent, setCustomAccent] = useState("#ffffff");
   const [previousPrimary, setPreviousPrimary] = useState("#000000");
   const [previousAccent, setPreviousAccent] = useState("#ffffff");
 
-  useEffect(() => {
-    // Apply the theme settings to the document
-    let primaryColor = "#1c1c22";
-    let accentColor = "#42342B";
-    let accentHoverColor = "#8A9A5B";
+  // Function to apply theme settings to document and save to localStorage
+  const applyTheme = (theme, customPrimary, customAccent) => {
+    let primaryColor, accentColor, accentHoverColor;
 
     switch (theme) {
       case "Blue and Pink":
@@ -43,7 +42,12 @@ const ThemeSelector = () => {
       case "Custom":
         primaryColor = customPrimary;
         accentColor = customAccent;
-        accentHoverColor = customAccent; // Or another custom hover color if needed
+        accentHoverColor = customAccent;
+        break;
+      default:
+        primaryColor = "#1c1c22";
+        accentColor = "#42342B";
+        accentHoverColor = "#8A9A5B";
         break;
     }
 
@@ -55,13 +59,30 @@ const ThemeSelector = () => {
       setPreviousPrimary(primaryColor);
       setPreviousAccent(accentColor);
     }
-  }, [theme, customPrimary, customAccent]);
 
+    if (typeof window !== "undefined") {
+      localStorage.setItem('theme', theme);
+      localStorage.setItem('customPrimary', customPrimary);
+      localStorage.setItem('customAccent', customAccent);
+    }
+  };
+
+  // Load initial values from localStorage
   useEffect(() => {
-    // Save theme to local storage
-    localStorage.setItem('theme', theme);
-    localStorage.setItem('customPrimary', customPrimary);
-    localStorage.setItem('customAccent', customAccent);
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem('theme') || "Default";
+      const savedCustomPrimary = localStorage.getItem('customPrimary') || "#000000";
+      const savedCustomAccent = localStorage.getItem('customAccent') || "#ffffff";
+      setTheme(savedTheme);
+      setCustomPrimary(savedCustomPrimary);
+      setCustomAccent(savedCustomAccent);
+      applyTheme(savedTheme, savedCustomPrimary, savedCustomAccent); // Apply theme on initial load
+    }
+  }, []);
+
+  // Apply theme settings when state changes
+  useEffect(() => {
+    applyTheme(theme, customPrimary, customAccent);
   }, [theme, customPrimary, customAccent]);
 
   const handleThemeChange = (value) => {
