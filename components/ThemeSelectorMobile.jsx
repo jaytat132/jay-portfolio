@@ -90,7 +90,7 @@ const ThemeSelectorMobile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col justify-center items-center gap-8">
       <Select onValueChange={handleThemeChange} value={theme}>
         <SelectTrigger className="inline-flex items-center">
           <SelectValue>{theme}</SelectValue>
@@ -106,7 +106,7 @@ const ThemeSelectorMobile = () => {
         </SelectContent>
       </Select>
       {theme === "Custom" && (
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col justify-center items-center gap-8">
           <PrimarySelector value={customPrimary} onChange={setCustomPrimary} />
           <AccentSelector value={customAccent} onChange={setCustomAccent} />
         </div>
