@@ -32,6 +32,13 @@ const projectsDone = [
     image: "/assets/duck.png",
     github: "https://github.com/jaytat132/jay-portfolio",
   },
+  {
+    num: "03",
+    title: "Sofascore Euroleague Data",
+    description: "Pulls and puts Euroleague game data into csv format from Sofascore",
+    image: "/assets/ProjectPics/sofascore.png",
+    github: "https://github.com/jaytat132/sofascore-euroleague-data",
+  },
 ];
 
 const Projects = () => {
