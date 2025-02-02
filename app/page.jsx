@@ -14,7 +14,7 @@ const Home = () => {
               name is
             </h1>
             <NameAnimation />
-            <p className="mt-4">I'm currently an upcoming Senior studying Computer Science <br />at the University of California, Davis.</p>
+            <p className="mt-4">I'm currently Senior studying Computer Science <br />at the University of California, Davis.</p>
             {/* socials */}
             <div className="mt-4 mb-8 xl:mb-0">
               <Social

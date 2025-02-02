@@ -5,7 +5,7 @@ import { SiLeagueoflegends } from "react-icons/si";
 const socials = [
     {icon: <FaGithub />, path: "https://github.com/jaytat132"},
     {icon: <FaLinkedinIn />, path: "https://www.linkedin.com/in/jay-tat-697510163/"},
-    {icon: <SiLeagueoflegends />, path: "https://www.op.gg/summoners/na/DeeJay-DOGGY"},
+   
 
 ]
 
