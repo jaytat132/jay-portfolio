@@ -10,7 +10,7 @@ const resume = () => {
                   Education
                 </h1>
                 <p className="mt-4 text-lg">University Of California, Davis Bachelor's of Science in Computer Science</p>
-                <li>Relavent Coursework: Computer Organization, Computer Architecture,  Data Structures, Algorithms Design \& Analysis, Operating Systems, Computer Networks, Software Engineering, Theory of Computation</li>
+                <li>Relavent Coursework: Computer Organization, Computer Architecture,  Data Structures, Algorithms Design & Analysis, Operating Systems, Computer Networks, Software Engineering, Theory of Computation</li>
                 <h1 className="text-5xl font-bold leading-tight">Skills</h1>
                 <ul className="mt-4 text-lg">
                   <li>Languages: Java, Python, C/C++, JavaScript, TypeScript, HTML/CSS</li>
