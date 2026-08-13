@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { BsGithub } from "react-icons/bs";
+import { FiExternalLink } from "react-icons/fi";
 
 import {
   Tooltip,
@@ -20,24 +21,48 @@ import WorkSliderBtns from "@/components/WorkSliderBtns";
 const projectsDone = [
   {
     num: "01",
-    title: "Shopify Variant Grabber",
-    description: "Pulls variants from a shopify website",
-    image: "/assets/ProjectPics/vargrabber.png",
-    github: "https://github.com/jaytat132/Shopify-Variant-Grabber",
+    title: "OtoMedic",
+    description:
+      "Turns patient voicemails into structured refill, reschedule, and message tasks ready for care-team review.",
+    image: "/assets/ProjectPics/otomedic.png",
+    href: "https://github.com/ricardo-pc/Berkeley-AI-Hackathon",
+    linkType: "github",
   },
   {
     num: "02",
-    title: "jaytat.dev",
-    description: "Personal website",
-    image: "/assets/duck.png",
-    github: "https://github.com/jaytat132/jay-portfolio",
+    title: "Foochastic",
+    description:
+      "Model-led soccer player prop analysis with published picks, confidence tiers, and transparent reasoning.",
+    image: "/assets/ProjectPics/foochastic.png",
+    href: "https://foochastic.com",
+    linkType: "website",
   },
   {
     num: "03",
+    title: "Shopify Variant Grabber",
+    description: "Pulls variants from a shopify website",
+    image: "/assets/ProjectPics/vargrabber.png",
+    href: "https://github.com/jaytat132/Shopify-Variant-Grabber",
+    linkType: "github",
+    archived: true,
+  },
+  {
+    num: "04",
+    title: "jaytat.dev",
+    description: "Personal website",
+    image: "/assets/duck.png",
+    href: "https://github.com/jaytat132/jay-portfolio",
+    linkType: "github",
+    archived: true,
+  },
+  {
+    num: "05",
     title: "Sofascore Euroleague Data",
     description: "Pulls and puts Euroleague game data into csv format from Sofascore",
     image: "/assets/ProjectPics/sofascore.png",
-    github: "https://github.com/jaytat132/sofascore-euroleague-data",
+    href: "https://github.com/jaytat132/sofascore-euroleague-data",
+    linkType: "github",
+    archived: true,
   },
 ];
 
@@ -74,21 +99,42 @@ const Projects = () => {
               <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">
                 {project.title}
               </h2>
+              {project.archived && (
+                <span className="w-fit rounded-full border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+                  Archived
+                </span>
+              )}
               {/* project description */}
               <p className="text-white/60">{project.description}</p>
               {/* border */}
               <div className="border border-white/20"></div>
               {/* Buttons */}
               <div>
-                {/* github button */}
-                <Link href={project.github}>
+                <Link
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={
+                    project.linkType === "github"
+                      ? `View ${project.title} on GitHub`
+                      : `Visit the ${project.title} website`
+                  }
+                >
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white text-3xl group-hover:text-accent" />
+                        {project.linkType === "github" ? (
+                          <BsGithub className="text-white text-3xl group-hover:text-accent" />
+                        ) : (
+                          <FiExternalLink className="text-white text-3xl group-hover:text-accent" />
+                        )}
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Github repository</p>
+                        <p>
+                          {project.linkType === "github"
+                            ? "GitHub repository"
+                            : "Visit website"}
+                        </p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -114,8 +160,10 @@ const Projects = () => {
                         <Image
                           src={project.image}
                           fill
-                          className="object-cover"
-                          alt=""
+                          className={`object-cover ${
+                            project.archived ? "grayscale opacity-70" : ""
+                          }`}
+                          alt={`${project.title} project preview`}
                         />
                       </div>
                     </div>
