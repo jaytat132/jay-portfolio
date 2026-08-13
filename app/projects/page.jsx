@@ -48,15 +48,6 @@ const projectsDone = [
   },
   {
     num: "04",
-    title: "jaytat.dev",
-    description: "Personal website",
-    image: "/assets/duck.png",
-    href: "https://github.com/jaytat132/jay-portfolio",
-    linkType: "github",
-    archived: true,
-  },
-  {
-    num: "05",
     title: "Sofascore Euroleague Data",
     description: "Pulls and puts Euroleague game data into csv format from Sofascore",
     image: "/assets/ProjectPics/sofascore.png",
