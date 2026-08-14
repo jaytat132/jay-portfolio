@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -16,8 +16,8 @@ const ThemeSelector = () => {
   const [theme, setTheme] = useState("Default");
   const [customPrimary, setCustomPrimary] = useState("#000000");
   const [customAccent, setCustomAccent] = useState("#ffffff");
-  const [previousPrimary, setPreviousPrimary] = useState("#000000");
-  const [previousAccent, setPreviousAccent] = useState("#ffffff");
+  const previousPrimary = useRef("#000000");
+  const previousAccent = useRef("#ffffff");
 
   // Function to apply theme settings to document and save to localStorage
   const applyTheme = (theme, customPrimary, customAccent) => {
@@ -56,8 +56,8 @@ const ThemeSelector = () => {
     document.documentElement.style.setProperty("--accent-hover-color", accentHoverColor);
 
     if (theme !== "Custom") {
-      setPreviousPrimary(primaryColor);
-      setPreviousAccent(accentColor);
+      previousPrimary.current = primaryColor;
+      previousAccent.current = accentColor;
     }
 
     if (typeof window !== "undefined") {
@@ -73,6 +73,8 @@ const ThemeSelector = () => {
       const savedTheme = localStorage.getItem('theme') || "Default";
       const savedCustomPrimary = localStorage.getItem('customPrimary') || "#000000";
       const savedCustomAccent = localStorage.getItem('customAccent') || "#ffffff";
+      // Loading client-only preferences after hydration avoids a server/client markup mismatch.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(savedTheme);
       setCustomPrimary(savedCustomPrimary);
       setCustomAccent(savedCustomAccent);
@@ -87,8 +89,8 @@ const ThemeSelector = () => {
 
   const handleThemeChange = (value) => {
     if (value === "Custom") {
-      setCustomPrimary(previousPrimary);
-      setCustomAccent(previousAccent);
+      setCustomPrimary(previousPrimary.current);
+      setCustomAccent(previousAccent.current);
     }
     setTheme(value);
   };

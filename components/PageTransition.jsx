@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const PageTransition = ({ children }) => {
   const pathname = usePathname();
+  const isDaylog = pathname.startsWith("/daylog");
   return (
     <AnimatePresence>
       <div key={pathname}>
@@ -14,7 +15,9 @@ const PageTransition = ({ children }) => {
             opacity: 0,
             transition: { delay: 1, duration: 0.4, ease: "easeInOut" },
           }}
-          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
+          className={`h-screen w-screen fixed top-0 pointer-events-none ${
+            isDaylog ? "bg-[#f4f1eb]" : "bg-primary"
+          }`}
         /> 
         {children}
       </div>

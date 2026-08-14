@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 
 const AccentSelector = ({ value, onChange }) => {
-  const [color, setColor] = useState(value);
   const [showPicker, setShowPicker] = useState(false);
 
   const handleButtonClick = () => {
@@ -13,7 +12,6 @@ const AccentSelector = ({ value, onChange }) => {
   };
 
   const handleColorChange = (newColor) => {
-    setColor(newColor);
     onChange(newColor);
   };
 
@@ -23,13 +21,13 @@ const AccentSelector = ({ value, onChange }) => {
         variant="default"
         size="default"
         onClick={handleButtonClick}
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: value }}
       >
         Select Accent Color
       </Button>
       {showPicker && (
         <div className="absolute mt-2 z-10">
-          <HexColorPicker color={color} onChange={handleColorChange} />
+          <HexColorPicker color={value} onChange={handleColorChange} />
         </div>
       )}
     </div>

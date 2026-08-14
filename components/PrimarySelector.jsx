@@ -1,22 +1,16 @@
 "use client";
 import { HexColorPicker } from "react-colorful";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 
 const PrimarySelector = ({ value, onChange }) => {
-  const [color, setColor] = useState(value);
   const [showPicker, setShowPicker] = useState(false);
-
-  useEffect(() => {
-    setColor(value);
-  }, [value]);
 
   const handleButtonClick = () => {
     setShowPicker((prev) => !prev); // Toggle based on previous state
   };
 
   const handleColorChange = (newColor) => {
-    setColor(newColor);
     onChange(newColor);
   };
 
@@ -27,7 +21,7 @@ const PrimarySelector = ({ value, onChange }) => {
       </Button>
       {showPicker && (
         <div className="absolute mt-2 z-10">
-          <HexColorPicker color={color} onChange={handleColorChange} />
+          <HexColorPicker color={value} onChange={handleColorChange} />
         </div>
       )}
     </div>

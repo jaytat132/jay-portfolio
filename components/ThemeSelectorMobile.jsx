@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -21,8 +21,8 @@ const ThemeSelectorMobile = () => {
   const [customAccent, setCustomAccent] = useState(() =>
     typeof window !== "undefined" ? localStorage.getItem("customAccent") || "#ffffff" : "#ffffff"
   );
-  const [previousPrimary, setPreviousPrimary] = useState("#000000");
-  const [previousAccent, setPreviousAccent] = useState("#ffffff");
+  const previousPrimary = useRef("#000000");
+  const previousAccent = useRef("#ffffff");
 
   useEffect(() => {
     const applyTheme = (theme, customPrimary, customAccent) => {
@@ -64,27 +64,27 @@ const ThemeSelectorMobile = () => {
         localStorage.setItem("theme", theme);
         localStorage.setItem("customPrimary", customPrimary);
         localStorage.setItem("customAccent", customAccent);
-        localStorage.setItem("previousPrimary", previousPrimary);
-        localStorage.setItem("previousAccent", previousAccent);
+        localStorage.setItem("previousPrimary", previousPrimary.current);
+        localStorage.setItem("previousAccent", previousAccent.current);
       }
     };
 
     applyTheme(theme, customPrimary, customAccent);
-  }, [theme, customPrimary, customAccent, previousPrimary, previousAccent]);
+  }, [theme, customPrimary, customAccent]);
 
   useEffect(() => {
     if (theme !== "Custom") {
       const primaryColor = getComputedStyle(document.documentElement).getPropertyValue("--primary-color");
       const accentColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color");
-      setPreviousPrimary(primaryColor);
-      setPreviousAccent(accentColor);
+      previousPrimary.current = primaryColor;
+      previousAccent.current = accentColor;
     }
   }, [theme]);
 
   const handleThemeChange = (value) => {
     if (value === "Custom") {
-      setCustomPrimary(previousPrimary);
-      setCustomAccent(previousAccent);
+      setCustomPrimary(previousPrimary.current);
+      setCustomAccent(previousAccent.current);
     }
     setTheme(value);
   };
